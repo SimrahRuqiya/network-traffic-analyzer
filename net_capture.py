@@ -31,7 +31,7 @@ def capture_packets(interface, output_file, duration):
                 timestamp = packet.sniff_time
                 source_ip = packet.ip.src 
                 destination_ip = packet.ip.dst 
-                protocol = packet.transport_layer 
+                protocol = packet.highest_layer
                 length = packet.length
 
                 # Write the packet details to the CSV file
