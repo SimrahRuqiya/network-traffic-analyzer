@@ -11,23 +11,37 @@ def plot_packet_analysis(df):
     
     :param df: DataFrame containing captured packet information.
     """
-    
-    # Create a figure and axes (3 subplots side by side)
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
 
-    # --- Plot 1: Protocol distribution ---
+    # Create a figure and 2x2 grid of subplots
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    axes = axes.flatten()  # flatten for easier indexing
+
+    # Plot 1: Protocol distribution
     sns.countplot(data=df, x='Protocol', ax=axes[0], palette='viridis')
     axes[0].set_title('Protocol Distribution')
     axes[0].set_xlabel('Protocol')
     axes[0].set_ylabel('Count')
     axes[0].tick_params(axis='x', rotation=45)
 
-    # --- Plot 2: Top 5 Source IPs ---
+    # Plot 2: Top 5 Source IPs 
     top_sources = df['Source IP'].value_counts().nlargest(5)
     sns.barplot(x=top_sources.values, y=top_sources.index, ax=axes[1], palette='magma')
     axes[1].set_title('Top 5 Source IPs')
     axes[1].set_xlabel('Packet Count')
     axes[1].set_ylabel('Source IP')
+
+    # Plot 3: Packet Length Distribution
+    sns.histplot(df['Length'].dropna(), bins=15, ax=axes[2], kde=True, color='coral')
+    axes[2].set_title('Packet Length Distribution')
+    axes[2].set_xlabel('Packet Length')
+    axes[2].set_ylabel('Frequency')
+
+    # Plot 4: Top 5 Destination IPs
+    top_destinations = df['Destination IP'].value_counts().nlargest(5)
+    sns.barplot(x=top_destinations.values, y=top_destinations.index, ax=axes[3], palette='plasma')
+    axes[3].set_title('Top 5 Destination IPs')
+    axes[3].set_xlabel('Packet Count')
+    axes[3].set_ylabel('Destination IP')
 
     plt.tight_layout()
     plt.show()
