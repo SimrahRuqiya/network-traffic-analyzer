@@ -15,4 +15,5 @@ Main features:
 3. Plot data on a graph (protocol, top IP's, packet length)
 
 To run this on your machine locally, make sure to download the libraries using the command:
-pip install pyshark pandas matplotlib seaborn
+
+`pip install pyshark pandas matplotlib seaborn`
