@@ -37,7 +37,7 @@ def capture_packets(interface, output_file, duration):
                 # Write the packet details to the CSV file
                 writer.writerow([timestamp, source_ip, destination_ip, protocol, length])
             except AttributeError:
-                # Skip packets that don't have the expected attributes (e.g., non-IP packets)
+                # Handle packets that do not have the expected attributes
                 continue
 
     print(f"Capture complete. Packets saved to {output_file}.")

@@ -9,7 +9,6 @@ def analyze_packets_from_csv(file_path):
     :return: Dictionary containing the analysis results.
     """
 
-    # counter for the number of packets and the protocol distribution
     total_packets = 0
     protocol_counter = Counter()
 
@@ -18,7 +17,7 @@ def analyze_packets_from_csv(file_path):
         reader = csv.DictReader(file) # read the csv file as a dictionary
         for row in reader:
             total_packets += 1 
-            protocol = row['Protocol'] # get the protocol from the row
+            protocol = row['Protocol'] 
             protocol_counter[protocol] += 1
 
     # saves it in this format 
@@ -29,7 +28,6 @@ def analyze_packets_from_csv(file_path):
 
     return analysis_results
 
-# just for testing rn
 if __name__ == "__main__":
     file_path = 'captured_packets.csv'
     analysis = analyze_packets_from_csv(file_path)
